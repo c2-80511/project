@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Web Application</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #b3ffb3; /* Softened green background */
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_6190059.htm'); /* Replace with the direct URL of the image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8); /* White window with some transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slogan {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: #333; /* Dark gray color for the slogan */
+        }
+        label {
+            font-weight: bold;
+            display: block;
+        }
+        input[type="text"], input[type="tel"], input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff; /* Blue button */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="slogan">Your Health, Our Responsibility</div>
+    <div class="container">
+        <h1>Health Web Application</h1>
+        <form id="healthForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="disease">Select Disease:</label>
+            <select id="disease" name="disease" required>
+                <option value="">Select Disease</option>
+                <option value="heart">Heart Disease</option>
+                <option value="kidney">Kidney Disease</option>
+                <option value="diabetes">Diabetes</option>
+                <option value="liver">Liver Disease</option>
+                <option value="cancer">Cancer</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="footer">Made with ❤️ by CDAC DITISS Students Group No. 13</div>
+    <script>
+        // Form validation
+        document.getElementById('healthForm').addEventListener('submit', function(event) {
+            var isValid = true;
+            var mobileInput = document.getElementById('mobile');
+            if (!mobileInput.checkValidity() || mobileInput.value.length !== 10) {
+                isValid = false;
+                alert('Please enter a valid 10-digit mobile number.');
+            }
+            if (!isValid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    </script>
+</body>
+</html>
