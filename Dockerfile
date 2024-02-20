@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy the HTML file and any necessary assets into the container
-COPY index.html /usr/share/nginx/html/
+COPY index.html image.jpg styles.css /usr/share/nginx/html/
 # Copy any other assets or files your HTML page depends on
 
 # Expose port 80 to serve web traffic
