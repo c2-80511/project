@@ -5,6 +5,7 @@ FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/
 COPY style.css /usr/share/nginx/html/   # If you have a CSS file
 COPY script.js /usr/share/nginx/html/   # If you have a JavaScript file
+COPY image.jpg /usr/share/nginx/html/
 # Copy any other assets or files your HTML page depends on
 
 # Expose port 80 to serve web traffic
