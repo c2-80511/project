@@ -1,0 +1,15 @@
+/* styles.css */
+
+/* Set the background image */
+body {
+    /* Replace 'background-image.jpg' with the path to your image file */
+    background-image: url('image.jpg');
+    /* Set background size to cover the entire viewport */
+    background-size: cover;
+    /* Center the background image */
+    background-position: center;
+    /* Fix the background image so it doesn't scroll with the content */
+    background-attachment: fixed;
+    /* Optional: Add a background color as a fallback */
+    background-color: #f0f0f0;
+}
