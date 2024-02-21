@@ -9,12 +9,8 @@ pipeline {
         }
         
         stage("Docker build") {
-            steps {
-                sh 'docker builder prune -a'
-                sh 'docker version'
-                sh 'docker build -t project .'
-                sh 'docker image list'
-                sh 'docker tag project rajatkokane/projectfinal:latest' // Tag with a specific version
+            steps{
+                sh "docker build . -t rajatkokane/projectfinal"
             }
         }
         
