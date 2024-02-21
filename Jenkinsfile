@@ -1,24 +1,43 @@
 pipeline {
     agent any
     
-    stages{
-        stage("Code"){
-            steps{
-                git url: "https://github.com/LondheShubham153/two-tier-flask-app.git", branch: "jenkins"
+    stages {
+        stage('fetch from repo') { 
+            steps {
+                git branch: 'master', url: 'https://github.com/c2-80511/project.git' 
             }
         }
-        stage("Build & Test"){
-            steps{
-                sh "docker build . -t flaskapp"
+        
+        stage("Docker build") {
+            steps {
+                sh 'docker builder prune -a'
+                sh 'docker version'
+                sh 'docker build -t project .'
+                sh 'docker image list'
+                sh 'docker tag project rajatkokane/projectfinal:latest' // Tag with a specific version
             }
         }
-        stage("Push to DockerHub"){
-            steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker tag flaskapp ${env.dockerHubUser}/flaskapp:latest"
-                    sh "docker push ${env.dockerHubUser}/flaskapp:latest" 
+        
+        stage("Docker login") {
+            environment {
+                DOCKER_CREDENTIALS = credentials('a1a67991-4670-45fa-ad88-df90e20a2bf9')
+            }
+            steps {
+                withCredentials([string(credentialsId: 'a1a67991-4670-45fa-ad88-df90e20a2bf9', variable: 'PASSWORD')]) {
+                    sh "echo \$PASSWORD | docker login -u rajatkokane --password-stdin"
                 }
+            }
+        }
+        
+        stage("Push Image to Docker Hub") {
+            steps {
+                sh 'docker push rajatkokane/projectfinal:latest' // Push the tagged image
+            }
+        }
+        
+        stage("Pull Image from Docker Hub") {
+            steps {
+                sh 'docker pull rajatkokane/projectfinal'
             }
         }
         stage("Deploy"){
